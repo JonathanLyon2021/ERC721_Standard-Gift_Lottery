@@ -10,3 +10,14 @@ contract GiftLottery is ERC721 {
     address[] private participants;
     uint256 private endTime;
 }
+
+struct Gift {
+    string title;
+    string description;
+    string tokenURI;
+}
+
+mapping(uint256 => Gift) giftIdToGift;
+
+using Counters for Counters.Counter;
+Counters.Counter private _tokenIds;
