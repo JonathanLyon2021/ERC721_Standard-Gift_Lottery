@@ -45,5 +45,9 @@ function createGift(string calldata _title, string calldata _description, string
     
     participants.push(msg.sender);
     emit CreateGift(msg.sender, index);
-    
+}
+
+function psuedoRandom(uint256 _giftId) private view returns(uint) {
+    Gift memory gift = giftIdToGift[_giftId];
+    return uint(keccak256(abi.encodePacked(gift.title, gift.description, gift.tokenURI, _giftId))) % participants.length;
 }
