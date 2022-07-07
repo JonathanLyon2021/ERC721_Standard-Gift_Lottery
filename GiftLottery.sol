@@ -19,10 +19,15 @@ struct Gift {
 
 mapping(uint256 => Gift) giftIdToGift;
 
-using Counters for Counters.Counter;
-Counters.Counter private _tokenIds;
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
 
 constructor(uint256 _endtime) ERC721("GiftLottery", "GLT") {
     owner = msg.sender;
     endtime = _endtime;
     }
+    
+modifier onlyOwner {
+    require(msg.sender == owner, "Must be the Contract Owner");
+_;
+}
