@@ -34,3 +34,16 @@ _;
 
 event CreateGift(address indexed participant, uint256 giftId);
 
+function createGift(string calldata _title, string calldata _description, string calldata token URI) external {
+    require(endtime >= block.timestamp, "Creation Time is Over");
+    _tokenIds.increment();
+    uint256 indexx = _tokenIds.current();
+    
+    _mint(owner, index);
+    giftIdToGift[index] = Gift(_title, _description, tokenURI);
+    
+    
+    participants.push(msg.sender);
+    emit CreateGift(msg.sender, index);
+    
+}
