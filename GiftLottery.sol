@@ -31,3 +31,6 @@ modifier onlyOwner {
     require(msg.sender == owner, "Must be the Contract Owner");
 _;
 }
+
+event CreateGift(address indexed participant, uint256 giftId);
+
