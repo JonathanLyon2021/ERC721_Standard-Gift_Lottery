@@ -47,9 +47,22 @@ function createGift(string calldata _title, string calldata _description, string
     emit CreateGift(msg.sender, index);
 }
 
-function psuedoRandom(uint256 _giftId) private view returns(uint) {
+function pseudoRandom(uint256 _giftId) private view returns(uint) {
     Gift memory gift = giftIdToGift[_giftId];
     return uint(keccak256(abi.encodePacked(gift.title, gift.description, gift.tokenURI, _giftId))) % participants.length;
 }
 
 event ReceivedGift(address indexed winner, uint256 giftId);
+
+function distributeGifts() public onlyOwner {
+    for(uint i = 1; i <= _tokenIds.current(); i++) {
+    uint randomAddress = pseudoRandom(i);
+    
+    address winner = participants[randomAddress];
+    transferFrom(msg.sender, winner, i);
+    
+    emit ReceivedGift(winner, i);
+   
+   }
+}
+    
