@@ -51,3 +51,5 @@ function psuedoRandom(uint256 _giftId) private view returns(uint) {
     Gift memory gift = giftIdToGift[_giftId];
     return uint(keccak256(abi.encodePacked(gift.title, gift.description, gift.tokenURI, _giftId))) % participants.length;
 }
+
+event ReceivedGift(address indexed winner, uint256 giftId);
